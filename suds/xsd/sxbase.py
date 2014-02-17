@@ -98,6 +98,8 @@ class SchemaObject(object):
         self.max = root.get('maxOccurs')
         self.type = root.get('type')
         self.ref = root.get('ref')
+        self.form_qualified = True if splitPrefix(self.ref)[0] \
+            else root.get('form', schema.form_qualified)
         self.form_qualified = schema.form_qualified
         self.nillable = False
         self.default = root.get('default')
