@@ -271,6 +271,9 @@ class ElementWrapper(Element):
     def str(self, indent=0):
         return self.__content.str(indent)
 
+    def plain(self):
+        return self.__content.plain()
+
 
 class ElementAppender(Appender):
     """
