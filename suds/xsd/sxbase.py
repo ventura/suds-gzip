@@ -105,7 +105,6 @@ class SchemaObject(object):
             self.form_qualified = False
         else:
             self.form_qualified = schema.form_qualified
-        self.form_qualified = schema.form_qualified
         self.nillable = False
         self.default = root.get('default')
         self.rawchildren = []
