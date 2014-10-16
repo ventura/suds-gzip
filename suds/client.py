@@ -180,9 +180,10 @@ class Client(object):
         cp = Unskin(clone.options)
         mp = Unskin(self.options)
         cp.update(deepcopy(mp))
-        clone.wsdl = self.wsdl
+        clone.wsdl = deepcopy(self.wsdl)
+        clone.wsdl.options = clone.options
         clone.factory = self.factory
-        clone.service = ServiceSelector(clone, self.wsdl.services)
+        clone.service = ServiceSelector(clone, clone.wsdl.services)
         clone.sd = self.sd
         clone.messages = dict(tx=None, rx=None)
         return clone
