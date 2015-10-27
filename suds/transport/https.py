@@ -80,12 +80,12 @@ class HttpAuthenticated(HttpTransport):
         handlers.append(u2.HTTPBasicAuthHandler(self.pm))
         return handlers
 
-    def build_ssl_context(self):
+    def build_ssl_opener(self):
         context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
         context.verify_mode = ssl.CERT_REQUIRED
         context.check_hostname = True
         context.load_default_certs()
-        return context
+        return urllib2.HTTPSHandler(context=context)
 
 
 class WindowsHttpAuthenticated(HttpAuthenticated):

@@ -68,9 +68,9 @@ class HttpTransport(Transport):
         self.cookiejar = CookieJar()
         self.proxy = dict()
         self.urlopener = None
-        self.ssl_context = (self.build_ssl_context()
-                            if getattr(self, 'build_ssl_context', None)
-                            else None)
+        self.ssl_opener = (self.build_ssl_opener()
+                           if getattr(self, 'ssl_opener', None)
+                           else None)
 
     # This implementation of "open" and "send"
     # could make it to the base class "Transport"
@@ -153,8 +153,7 @@ class HttpTransport(Transport):
                 socket.settimeout(tm)
                 u2response = urlopener.open(u2request)
             else:
-                u2response = urlopener.open(u2request, timeout=tm,
-                                            context=self.ssl_context)
+                u2response = urlopener.open(u2request, timeout=tm)
         except u2.HTTPError, e:
             # This error is to mimic the original exception code
             if not retfile and e.code in (202, 204):
@@ -214,7 +213,11 @@ class HttpTransport(Transport):
         @rtype: I{OpenerDirector}
         """
         if self.urlopener is None or self.proxy != self.options.proxy:
-            self.urlopener = u2.build_opener(*self.u2handlers())
+            openers = []
+            if self.ssl_opener:
+                openers.append(self.ssl_opener),
+            openers.append(*self.u2handlers())
+            self.urlopener = u2.build_opener(openers)
 
         return self.urlopener
 
