@@ -217,7 +217,7 @@ class HttpTransport(Transport):
             if self.ssl_opener:
                 openers.insert(0, self.ssl_opener)
 
-            self.urlopener = u2.build_opener(openers)
+            self.urlopener = u2.build_opener(*openers)
 
         return self.urlopener
 
