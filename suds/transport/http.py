@@ -69,7 +69,7 @@ class HttpTransport(Transport):
         self.proxy = dict()
         self.urlopener = None
         self.ssl_opener = (self.build_ssl_opener()
-                           if getattr(self, 'ssl_opener', None)
+                           if getattr(self, 'build_ssl_opener', None)
                            else None)
 
     # This implementation of "open" and "send"

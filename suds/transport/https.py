@@ -55,7 +55,6 @@ class HttpAuthenticated(HttpTransport):
         """
         HttpTransport.__init__(self, **kwargs)
         self.pm = u2.HTTPPasswordMgrWithDefaultRealm()
-        self.use_tls = True
 
     def open(self, request):
         self.addcredentials(request)
