@@ -1,0 +1,42 @@
+.DS_Store
+
+.ropeproject
+.external.env
+
+MANIFEST
+
+build/
+dist/
+venv/
+.idea/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+.eggs/
+.installed.cfg
+bin
+build
+develop-eggs
+dist
+eggs
+lib
+lib64
+parts
+sdist
+var
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+htmlcov
+test.xml
+coverage.xml
