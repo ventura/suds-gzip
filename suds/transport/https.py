@@ -86,6 +86,19 @@ class HttpAuthenticated(HttpTransport):
         context.load_default_certs()
         return u2.HTTPSHandler(context=context)
 
+    def u2opener(self):
+        """
+        Create a urllib opener.
+        @return: An opener.
+        @rtype: I{OpenerDirector}
+        """
+        if self.urlopener is None or self.proxy != self.options.proxy:
+            openers = self.u2handlers()
+            openers.insert(0, self.build_ssl_opener())
+            self.urlopener = u2.build_opener(*openers)
+
+        return self.urlopener
+
 
 class WindowsHttpAuthenticated(HttpAuthenticated):
     """

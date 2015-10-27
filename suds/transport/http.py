@@ -68,9 +68,7 @@ class HttpTransport(Transport):
         self.cookiejar = CookieJar()
         self.proxy = dict()
         self.urlopener = None
-        self.ssl_opener = (self.build_ssl_opener()
-                           if getattr(self, 'build_ssl_opener', None)
-                           else None)
+
 
     # This implementation of "open" and "send"
     # could make it to the base class "Transport"
@@ -214,8 +212,6 @@ class HttpTransport(Transport):
         """
         if self.urlopener is None or self.proxy != self.options.proxy:
             openers = self.u2handlers()
-            if self.ssl_opener:
-                openers.insert(0, self.ssl_opener)
 
             self.urlopener = u2.build_opener(*openers)
 
