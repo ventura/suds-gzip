@@ -213,10 +213,10 @@ class HttpTransport(Transport):
         @rtype: I{OpenerDirector}
         """
         if self.urlopener is None or self.proxy != self.options.proxy:
-            openers = []
+            openers = self.u2handlers()
             if self.ssl_opener:
-                openers.append(self.ssl_opener),
-            openers += self.u2handlers()
+                openers.insert(0, self.ssl_opener)
+
             self.urlopener = u2.build_opener(openers)
 
         return self.urlopener
